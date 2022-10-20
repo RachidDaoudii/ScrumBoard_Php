@@ -2,12 +2,12 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$data ="tasks";
+$database ="tasks";
 
 try {
-  $conn = new PDO("mysql:host=$servername;dbname=$data", $username, $password);
+  $connection = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
   // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     //   echo "Connected successfully";
     echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
     <div class='bi flex-shrink-0 me-2' width='24' height='24' role='img' aria-label='Success:'><i class><i/></div>

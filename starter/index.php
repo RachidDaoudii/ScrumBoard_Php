@@ -34,77 +34,19 @@
 				</div>
 				
 				<div class="btn-task align-self-center">
-					<button class="btn btn-success rounded-pill d-flex" data-bs-toggle="modal" data-bs-target="#Modal" ><i class='bx bx-plus p-1' style='color:#00218b'></i> Add Task</a>
+					<button class="btn btn-success rounded-pill d-flex" data-bs-toggle="modal" data-bs-target="#Modal" ><i class='bx bx-plus p-1' style='color:#00218b'></i> Add Task</button>
 				</div>
 			</div>
 			<?php
-				require 'Connection.php'	
+				require 'Connection.php';
+				$sql = "SELECT * FROM task";
+				$result = $connection -> query($sql);
+				if(!$result){
+					die("Invalid query : " . $connection->error);
+				}
 			?>
-			
-			<!-- Modal -->
-			<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<form action="#">
-							<div class="mb-3">
-								<label for="title" class="from-label fw-bold">Title</label>
-								<input type="text" name="Title" id="title" class="form-control">
-							</div>
-							<label for="type" class="from-label fw-bold">Type</label>
-							<div class="mb-3">
-								<div class="mb-1">
-									<input type="radio" checked class="form-check-input" name="type" id="feature" value="1">
-									<label for="type" class="form-check-label">feature</label>
-								</div>
-								<div class="mb-1">
-									<input type="radio" class="form-check-input" name="type" id="bug" value="2">
-									<label for="type" class="form-check-label">bug</label>
-								</div>
-							</div>
-							<div class="mb-3">
-								<label for="Priority" class="from-label fw-bold">Priority</label>
-								<select name="Priority" required id="Priority" class="form-select" >
-									<option disabled selected>Please select</option>
-									<option value="Low">Low</option>
-									<option value="Medium">Medium</option>
-									<option value="High">High</option>
-									<option value="Critical">Critical</option>
-								</select>
-							</div>
-							<div class="mb-3">
-								<label for="status" class="from-label fw-bold">Status</label>
-								<select name="status" required id="status" class="form-select" >
-									<option value="" disabled selected>Please select</option>
-									<option value="To Do">To do</option>
-									<option value="In Progress">In Progress</option>
-									<option value="Done">Done</option>
-								</select>
-							</div>
-							<div class="mb-3">
-								<label for="date" class="from-label fw-bold">Date</label>
-								<input type="date" class="form-control" name="date" id="date">
-							</div>
-							<div class="mb-3">
-								<label for="description" class="from-label fw-bold">Description</label>
-								<textarea class="form-control" name="description" id="description" rows="10"></textarea>
-							</div>
-						</form>
-					</div>
-					<div class="modal-footer" id="modal-footer">
-						<button type="button" class="btn btn-secondary text-black" data-bs-dismiss="modal">Close</button>
-						<button type="button" id="delete" onclick="delete_task()" class="btn btn-red" data-bs-dismiss="modal">Delete</button>
-						<button type="button" id="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="Ajouter()">Save</button>
-					</div>
-				</div>
-				</div>
-			</div>
-			<!-- Modal -->
 			<div class="row">
+				
 				<div class="col-lg-4 col-md-6 col-sm-12">
 					<div class="p-2">
 						<div class="">
@@ -112,22 +54,30 @@
 						</div>
 						<div class="todo" id="to-do-tasks">
 							<!-- TO DO TASKS HERE -->
-							<button class=" w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal" id="btn">
-								<div class="fs-2">
-									<i class='bx bx-help-circle' style='color:#00d68a'></i> 
-								</div>
-								<div class="p-2 text-start">
-									<div class="fw-bold" id="titre">Keep all the updated requirements in one place</div>
-									<div class="pt-1">
-										<div class=" text-secondary">#1 created in 2022-10-08</div>
-										<div class="text-truncate" title="">There is hardly anything more frustrating than having t...</div>
-									</div>
-									<div class="pt-1">
-										<span class="p-1 btn btn-primary border border-0">High</span>
-										<span class="p-1 btn btn-secondary border border-0 text-black">Feature</span>
-									</div>
-								</div>
-							</button>
+							<?php 
+								while ($row = $result -> fetch()) {
+									echo"
+										<button class=' w-100 bg-white border-0 border-secondary border-bottom d-flex' data-bs-toggle='modal' data-bs-target='#Modal' id='btn'>
+											<div class='fs-2'>
+												<i class='bx bx-help-circle' style='color:#00d68a'></i> 
+											</div>
+											<div class='p-2 text-start'>
+												<div class='fw-bold' id='titre'>Keep all the updated requirements in one place</div>
+												<div class='pt-1'>
+													<div class='' text-secondary'>#1 created in 2022-10-08</div>
+													<div class='text-truncate' title=''>There is hardly anything more frustrating than having t...</div>
+												</div>
+												<div class='pt-1'>
+													<span class='p-1 btn btn-primary border border-0'>High</span>
+													<span class='p-1 btn btn-secondary border border-0 text-black'>Feature</span>
+												</div>
+											</div>
+										</button>
+									";
+								}
+								
+							?>
+							
 							<!-- <button class="w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-help-circle' style='color:#00d68a'></i>  
@@ -360,10 +310,69 @@
 	</div>
 	<!-- END #app -->
 	
-	<!-- TASK MODAL -->
-	<div class="modal fade" id="modal-task">
-		<!-- Modal content goes here -->
-	</div>
+	<!-- Modal -->
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form action="#">
+							<div class="mb-3">
+								<label for="title" class="from-label fw-bold">Title</label>
+								<input type="text" name="Title" id="title" class="form-control">
+							</div>
+							<label for="type" class="from-label fw-bold">Type</label>
+							<div class="mb-3">
+								<div class="mb-1">
+									<input type="radio" checked class="form-check-input" name="type" id="feature" value="1">
+									<label for="type" class="form-check-label">feature</label>
+								</div>
+								<div class="mb-1">
+									<input type="radio" class="form-check-input" name="type" id="bug" value="2">
+									<label for="type" class="form-check-label">bug</label>
+								</div>
+							</div>
+							<div class="mb-3">
+								<label for="Priority" class="from-label fw-bold">Priority</label>
+								<select name="Priority" required id="Priority" class="form-select" >
+									<option disabled selected>Please select</option>
+									<option value="Low">Low</option>
+									<option value="Medium">Medium</option>
+									<option value="High">High</option>
+									<option value="Critical">Critical</option>
+								</select>
+							</div>
+							<div class="mb-3">
+								<label for="status" class="from-label fw-bold">Status</label>
+								<select name="status" required id="status" class="form-select" >
+									<option value="" disabled selected>Please select</option>
+									<option value="To Do">To do</option>
+									<option value="In Progress">In Progress</option>
+									<option value="Done">Done</option>
+								</select>
+							</div>
+							<div class="mb-3">
+								<label for="date" class="from-label fw-bold">Date</label>
+								<input type="date" class="form-control" name="date" id="date">
+							</div>
+							<div class="mb-3">
+								<label for="description" class="from-label fw-bold">Description</label>
+								<textarea class="form-control" name="description" id="description" rows="10"></textarea>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer" id="modal-footer">
+						<button type="button" class="btn btn-secondary text-black" data-bs-dismiss="modal">Close</button>
+						<button type="button" id="delete" onclick="delete_task()" class="btn btn-red" data-bs-dismiss="modal">Delete</button>
+						<button type="button" id="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="Ajouter()">Save</button>
+					</div>
+				</div>
+				</div>
+			</div>
+			<!-- Modal -->
 	
 	<!-- ================== BEGIN core-js ================== -->
 	<script src="assets/js/vendor.min.js"></script>

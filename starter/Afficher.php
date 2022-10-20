@@ -1,4 +1,7 @@
 <?php
 $sql = "Select * From task";
-$res = conn->query($sql);
+$res = connection->query($sql);
+if(!res){
+    die("Invalid query : " . $connection->error);
+}
 ?>
