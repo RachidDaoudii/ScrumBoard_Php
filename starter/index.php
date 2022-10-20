@@ -37,6 +37,10 @@
 					<button class="btn btn-success rounded-pill d-flex" data-bs-toggle="modal" data-bs-target="#Modal" ><i class='bx bx-plus p-1' style='color:#00218b'></i> Add Task</a>
 				</div>
 			</div>
+			<?php
+				require 'Connection.php'	
+			?>
+			
 			<!-- Modal -->
 			<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
@@ -108,7 +112,7 @@
 						</div>
 						<div class="todo" id="to-do-tasks">
 							<!-- TO DO TASKS HERE -->
-							<!-- <button class=" w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal" id="btn">
+							<button class=" w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal" id="btn">
 								<div class="fs-2">
 									<i class='bx bx-help-circle' style='color:#00d68a'></i> 
 								</div>
@@ -123,7 +127,7 @@
 										<span class="p-1 btn btn-secondary border border-0 text-black">Feature</span>
 									</div>
 								</div>
-							</button> -->
+							</button>
 							<!-- <button class="w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-help-circle' style='color:#00d68a'></i>  
@@ -203,7 +207,7 @@
 						</div>
 						<div class="progres" id="in-progress-tasks">
 							<!-- IN PROGRESS TASKS HERE -->
-							<!-- <button class="w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
+							<button class="w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-loader-alt' style='color:#00d68a'></i> 
 								</div>
@@ -218,7 +222,7 @@
 										<span class="p-1 btn btn-secondary btn-sm border border-0 text-black">Bug</span>
 									</div>
 								</div>
-							</button> -->
+							</button>
 							<!-- <button class="w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-loader-alt' style='color:#00d68a'></i> 
@@ -278,7 +282,7 @@
 						</div>
 						<div class="done" id="done-tasks">
 							<!-- DONE TASKS HERE -->
-							<!-- <button class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
+							<button class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-check-circle' style='color:#00d68a'  ></i>
 								</div>
@@ -293,7 +297,7 @@
 										<span class="p-1 btn btn-secondary btn-sm border border-0 text-black">Bug</span>
 									</div>
 								</div>
-							</button> -->
+							</button>
 							<!-- <button class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
 								<div class="fs-2">
 									<i class='bx bx-check-circle' style='color:#00d68a'  ></i> 
