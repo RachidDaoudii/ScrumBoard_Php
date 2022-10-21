@@ -31,8 +31,8 @@
 // // }
 
 
-// //hidden  button Delete
-// _delete.style.display = 'none';
+//hidden  button Delete
+_delete.style.display = 'none';
 
 // //function Ajouter Task
 // function Ajouter(){
@@ -169,19 +169,19 @@
 // Afficher();
 
 // //function Modifier 
-// function update(i){
-//     index = i;
-//     title.value = data[i].title;
-//     feature.value = data[i].feature;
-//     priority.value = data[i].priority;
-//     Status.value = data[i].status;
-//     date.value = data[i].date;
-//     description.value = data[i].description;
-//     submit.innerHTML = 'update';
-//     _delete.style.display = 'block';
-//     mode = 'update';
-//     Afficher();
-// }
+function update(i){
+    // index = i;
+    // title.value = data[i].title;
+    // feature.value = data[i].feature;
+    // priority.value = data[i].priority;
+    // Status.value = data[i].status;
+    // date.value = data[i].date;
+    // description.value = data[i].description;
+    submit.innerHTML = 'update';
+    _delete.style.display = 'block';
+    mode = 'update';
+    Afficher();
+}
 // //return indice 
 // // function returnIndice(i){
 // //     pointer = i;

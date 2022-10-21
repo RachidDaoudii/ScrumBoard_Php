@@ -1,27 +1,4 @@
-<?php include "Connection.php";
-
-if (isset($_POST['submit'])){
-    $title = $_POST['title'];
-    $type = $_POST['feature'];
-    $Proirity = $_POST['priority'];
-    $Status = $_POST['status'];
-    $date = $_POST['date'];
-    $description = $_POST['description'];
-
-
-    $commande = "INSERT INTO `task` (`Id`,`Title`,`Type`,`Ptiority`,`Status`,`Date`,`Description`)
-	VALEUS (9,$title,$type,$Proirity,$Status,$date,$description)";
-
-    $resul = mysqli_query($connection,$commande);
-
-
-    if($resul){
-        header("location: index.php?msg = hhhh");
-    }
-}
-
-
-?>
+<?php require "Connection.php";?>
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -70,32 +47,30 @@ if (isset($_POST['submit'])){
 						</div>
 						<div class="todo" id="to-do-tasks">
 							<!-- TO DO TASKS HERE -->
-							
 							<?php 
-								//$sql = "SELECT * FROM  `task` ";
-								//$res = mysqli_query($connection,$res);
-								//while ($element = mysqli_fetch_assoc($res)){
+								$commande = "SELECT * FROM  `task` WHERE status = 'To Do'";
+								$sql= mysqli_query($connection,$commande);
+								while ($element = mysqli_fetch_assoc($sql)){
 									?>
-									<button class=" w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal" id="btn">
+									<button onclick="<?php $id = $element['id'] ?>" class=" w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal" id="btn">
 										<div class="fs-2">
 											<i class='bx bx-help-circle' style='color:#00d68a'></i> 
 										</div>
 										<div class="p-2 text-start">
-											<div class="fw-bold" id="titre"><?php //echo $element['Title'] ?></div>
+											<div class="fw-bold" id="titre"><?php echo $element['title'] ?></div>
 											<div class="pt-1">
-												<div class=" text-secondary">#<?php //echo $element['Id'] ?> created in <?php //echo $element['Date'] ?></div>
-												<div class="text-truncate" title=""><?php //echo $element['Description'] ?></div>
+												<div class=" text-secondary">#<?php echo $element['id'] ?> created in <?php echo $element['date'] ?></div>
+												<div class="text-truncate" title=""><?php echo $element['description'] ?></div>
 											</div>
 											<div class="pt-1">
-												<span class="p-1 btn btn-primary border border-0">High</span>
-												<span class="p-1 btn btn-secondary border border-0 text-black">Feature</span>
+												<span class="p-1 btn btn-primary border border-0"><?php echo $element['proirity'] ?></span>
+												<span class="p-1 btn btn-secondary border border-0 text-black"><?php echo $element['type'] ?></span>
 											</div>
 										</div>
 									</button>
 									<?php
-								//}
+								};
 							?>
-							
 						</div>
 					</div>
 				</div>
@@ -107,22 +82,30 @@ if (isset($_POST['submit'])){
 						</div>
 						<div class="progres" id="in-progress-tasks">
 							<!-- IN PROGRESS TASKS HERE -->
-							<button class="w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
-								<div class="fs-2">
-									<i class='bx bx-loader-alt' style='color:#00d68a'></i> 
-								</div>
-								<div class="p-2 text-start">
-									<div class="fw-bold">Describe steps to reproduce an issue</div>
-									<div class="pt-1">
-										<div class="text-secondary">#6 created in 2022-10-08</div>
-										<div class="text-truncate" title="including as many details as possible.">including as many details as possible.</div>
-									</div>
-									<div class="pt-1">
-										<span class="p-1 btn btn-primary border border-0">High</span>
-										<span class="p-1 btn btn-secondary btn-sm border border-0 text-black">Bug</span>
-									</div>
-								</div>
-							</button>
+							<?php 
+								$commande = "SELECT * FROM  `task` WHERE status = 'In Progress'";
+								$sql= mysqli_query($connection,$commande);
+								while ($element = mysqli_fetch_assoc($sql)){
+									?>
+									<button onclick="<?php $id = $element['id'] ?>"  class="w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
+										<div class="fs-2">
+											<i class='bx bx-loader-alt' style='color:#00d68a'></i> 
+										</div>
+										<div class="p-2 text-start">
+											<div class="fw-bold" id="titre"><?php echo $element['title'] ?></div>
+											<div class="pt-1">
+												<div class=" text-secondary">#<?php echo $element['id'] ?> created in <?php echo $element['date'] ?></div>
+												<div class="text-truncate" title=""><?php echo $element['description'] ?></div>
+											</div>
+											<div class="pt-1">
+												<span class="p-1 btn btn-primary border border-0"><?php echo $element['proirity'] ?></span>
+												<span class="p-1 btn btn-secondary border border-0 text-black"><?php echo $element['type'] ?></span>
+											</div>
+										</div>
+									</button>
+									<?php
+								};
+							?>
 						</div>
 					</div>
 				</div>
@@ -134,30 +117,36 @@ if (isset($_POST['submit'])){
 						</div>
 						<div class="done" id="done-tasks">
 							<!-- DONE TASKS HERE -->
-							<button class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
-								<div class="fs-2">
-									<i class='bx bx-check-circle' style='color:#00d68a'  ></i>
-								</div>
-								<div class="p-2 text-start">
-									<div class="fw-bold">Provide access to logs</div>
-									<div class="pt-1">
-										<div class="text-secondary">#10 created in 2022-10-08</div>
-										<div class="" title="as they can be helpful in reproducing the steps that caused the problem in the first place.">as they can be helpful in reproducing the steps that ca...</div>
-									</div>
-									<div class="pt-1">
-										<span class="p-1 btn btn-primary border border-0 ">High</span>
-										<span class="p-1 btn btn-secondary btn-sm border border-0 text-black">Bug</span>
-									</div>
-								</div>
-							</button>
+							<?php 
+								$commande = "SELECT * FROM  `task` WHERE status = 'Done'";
+								$sql= mysqli_query($connection,$commande);
+								while ($element = mysqli_fetch_assoc($sql)){
+									?>
+									<button onclick="location.href='Delete.php?id=<?php echo $id ?>'" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
+										<div class="fs-2">
+											<i class='bx bx-check-circle' style='color:#00d68a'  ></i>
+										</div>
+										<div class="p-2 text-start">
+											<div class="fw-bold" id="titre"><?php echo $element['title'] ?></div>
+											<div class="pt-1">
+												<div class=" text-secondary">#<?php echo $element['id'] ?> created in <?php echo $element['date'] ?></div>
+												<div class="text-truncate" title=""><?php echo $element['description'] ?></div>
+											</div>
+											<div class="pt-1">
+												<span class="p-1 btn btn-primary border border-0"><?php echo $element['proirity'] ?></span>
+												<span class="p-1 btn btn-secondary border border-0 text-black"><?php echo $element['type'] ?></span>
+											</div>
+										</div>
+									</button>
+									<?php
+								};
+							?>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!-- END #content -->
-		
-		
 		<!-- BEGIN scroll-top-btn -->
 		<a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top" data-toggle="scroll-to-top"><i class="fa fa-angle-up"></i></a>
 		<!-- END scroll-top-btn -->
@@ -173,7 +162,7 @@ if (isset($_POST['submit'])){
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form action="index.php" method="post">
+						<form action="create.php" method="post">
 							<div class="mb-3">
 								<label for="title" class="from-label fw-bold">Title</label>
 								<input type="text" name="Title" id="title" class="form-control">
@@ -181,11 +170,11 @@ if (isset($_POST['submit'])){
 							<label for="type" class="from-label fw-bold">Type</label>
 							<div class="mb-3">
 								<div class="mb-1">
-									<input type="radio" checked class="form-check-input" name="type" id="feature" value="1">
+									<input type="radio" checked class="form-check-input" name="Type" id="feature" value="feature">
 									<label for="type" class="form-check-label">feature</label>
 								</div>
 								<div class="mb-1">
-									<input type="radio" class="form-check-input" name="type" id="bug" value="2">
+									<input type="radio" class="form-check-input" name="Type" id="bug" value="bug">
 									<label for="type" class="form-check-label">bug</label>
 								</div>
 							</div>
@@ -201,7 +190,7 @@ if (isset($_POST['submit'])){
 							</div>
 							<div class="mb-3">
 								<label for="status" class="from-label fw-bold">Status</label>
-								<select name="status" required id="status" class="form-select" >
+								<select name="Status" required id="status" class="form-select" >
 									<option value="" disabled selected>Please select</option>
 									<option value="To Do">To do</option>
 									<option value="In Progress">In Progress</option>
@@ -209,20 +198,21 @@ if (isset($_POST['submit'])){
 								</select>
 							</div>
 							<div class="mb-3">
-								<label for="date" class="from-label fw-bold">Date</label>
-								<input type="date" class="form-control" name="date" id="date">
+								<label for="Date" class="from-label fw-bold">Date</label>
+								<input type="date" class="form-control" name="Date" id="date">
 							</div>
 							<div class="mb-3">
 								<label for="description" class="from-label fw-bold">Description</label>
-								<textarea class="form-control" name="description" id="description" rows="10"></textarea>
+								<textarea class="form-control" name="Description" id="description" rows="10"></textarea>
+							</div>
+							<div class="modal-footer" id="modal-footer">
+								<button type="submit" class="btn btn-secondary text-black" data-bs-dismiss="modal">Close</button>
+								<button type="submit" id="delete" onclick="delete_task()" class="btn btn-red" data-bs-dismiss="modal">Delete</button>
+								<button type="submit" id="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="Ajouter()">Save</button>
 							</div>
 						</form>
 					</div>
-					<div class="modal-footer" id="modal-footer">
-						<button type="button" class="btn btn-secondary text-black" data-bs-dismiss="modal">Close</button>
-						<button type="button" id="delete" onclick="delete_task()" class="btn btn-red" data-bs-dismiss="modal">Delete</button>
-						<button type="button" id="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="Ajouter()">Save</button>
-					</div>
+					
 				</div>
 				</div>
 			</div>

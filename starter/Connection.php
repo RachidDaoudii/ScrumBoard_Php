@@ -4,9 +4,6 @@ $username = "root";
 $password = "";
 $database ="tasks";
 
-
-
-
 $connection = mysqli_connect($servername,$username,$password,$database);
 
 if(!$connection){
