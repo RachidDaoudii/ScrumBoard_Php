@@ -1,3 +1,27 @@
+<?php include "Connection.php";
+
+if (isset($_POST['submit'])){
+    $title = $_POST['title'];
+    $type = $_POST['feature'];
+    $Proirity = $_POST['priority'];
+    $Status = $_POST['status'];
+    $date = $_POST['date'];
+    $description = $_POST['description'];
+
+
+    $commande = "INSERT INTO `task` (`Id`,`Title`,`Type`,`Ptiority`,`Status`,`Date`,`Description`)
+	VALEUS (9,$title,$type,$Proirity,$Status,$date,$description)";
+
+    $resul = mysqli_query($connection,$commande);
+
+
+    if($resul){
+        header("location: index.php?msg = hhhh");
+    }
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -37,14 +61,6 @@
 					<button class="btn btn-success rounded-pill d-flex" data-bs-toggle="modal" data-bs-target="#Modal" ><i class='bx bx-plus p-1' style='color:#00218b'></i> Add Task</button>
 				</div>
 			</div>
-			<?php
-				require 'Connection.php';
-				$sql = "SELECT * FROM task";
-				$result = $connection -> query($sql);
-				if(!$result){
-					die("Invalid query : " . $connection->error);
-				}
-			?>
 			<div class="row">
 				
 				<div class="col-lg-4 col-md-6 col-sm-12">
@@ -54,98 +70,32 @@
 						</div>
 						<div class="todo" id="to-do-tasks">
 							<!-- TO DO TASKS HERE -->
+							
 							<?php 
-								while ($row = $result -> fetch()) {
-									echo"
-										<button class=' w-100 bg-white border-0 border-secondary border-bottom d-flex' data-bs-toggle='modal' data-bs-target='#Modal' id='btn'>
-											<div class='fs-2'>
-												<i class='bx bx-help-circle' style='color:#00d68a'></i> 
+								//$sql = "SELECT * FROM  `task` ";
+								//$res = mysqli_query($connection,$res);
+								//while ($element = mysqli_fetch_assoc($res)){
+									?>
+									<button class=" w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal" id="btn">
+										<div class="fs-2">
+											<i class='bx bx-help-circle' style='color:#00d68a'></i> 
+										</div>
+										<div class="p-2 text-start">
+											<div class="fw-bold" id="titre"><?php //echo $element['Title'] ?></div>
+											<div class="pt-1">
+												<div class=" text-secondary">#<?php //echo $element['Id'] ?> created in <?php //echo $element['Date'] ?></div>
+												<div class="text-truncate" title=""><?php //echo $element['Description'] ?></div>
 											</div>
-											<div class='p-2 text-start'>
-												<div class='fw-bold' id='titre'>Keep all the updated requirements in one place</div>
-												<div class='pt-1'>
-													<div class='' text-secondary'>#1 created in 2022-10-08</div>
-													<div class='text-truncate' title=''>There is hardly anything more frustrating than having t...</div>
-												</div>
-												<div class='pt-1'>
-													<span class='p-1 btn btn-primary border border-0'>High</span>
-													<span class='p-1 btn btn-secondary border border-0 text-black'>Feature</span>
-												</div>
+											<div class="pt-1">
+												<span class="p-1 btn btn-primary border border-0">High</span>
+												<span class="p-1 btn btn-secondary border border-0 text-black">Feature</span>
 											</div>
-										</button>
-									";
-								}
-								
+										</div>
+									</button>
+									<?php
+								//}
 							?>
 							
-							<!-- <button class="w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
-								<div class="fs-2">
-									<i class='bx bx-help-circle' style='color:#00d68a'></i>  
-								</div>
-								<div class="p-2 text-start">
-									<div class="fw-bold">Consider creating an acceptance criteria list</div>
-									<div class="pt-1">
-										<div class="text-secondary">#2 created in 2022-10-08</div>
-										<div class="" title="Descriptive requirements are very helpful when it comes to understanding the context of a problem, yet finally it is good to precisely specify what is expected. Thus the developer will not have to look for the actual requirements in a long, descriptive text but he will be able to easily get to the essence. One might find that sometimes — when acceptance criteria are well defined — there is little or no need for any additional information. Example:
-						a) User navigates to “/accounts” and clicks on red download CSV button
-						b) Popup appears with two buttons: “This year” and “Last year”
-						c) If user clicked on “Last year” download is initiated
-						d) CSV downloaded includes following columns…">Descriptive requirements are very helpful when it comes...</div>
-									</div>
-									<div class="pt-1">
-										<span class="p-1 btn btn-primary btn-sm border border-0">High</span>
-										<span class="p-1 btn btn-secondary btn-sm border border-0 text-black">Feature</span>
-									</div>
-								</div>
-							</button>
-							<button class="w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
-								<div class="fs-2">
-									<i class='bx bx-help-circle' style='color:#00d68a'></i>  
-								</div>
-								<div class="p-2 text-start">
-									<div class="fw-bold">Provide examples, credentials, etc</div>
-									<div class="pt-1">
-										<div class="text-secondary">#3 created in 2022-10-08</div>
-										<div class="" title="">If the expectation is to process or generate some file ...</div>
-									</div>
-									<div class="pt-1">
-										<span class="p-1 btn btn-primary border border-0">High</span>
-										<span class="p-1 btn btn-secondary btn-sm border border-0 text-black">Feature</span>
-									</div>
-								</div>
-							</button>
-							<button class="w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
-								<div class="fs-2">
-									<i class='bx bx-help-circle' style='color:#00d68a'></i>  
-								</div>
-								<div class="p-2 text-start">
-									<div class="fw-bold">Annotate</div>
-									<div class="pt-1">
-										<div class="text-secondary">#4 created in 2022-10-08</div>
-										<div class="" title="">The mockup provided can sometimes be confusing for deve...</div>
-									</div>
-									<div class="pt-1">
-										<span class="p-1 btn btn-primary border border-0">High</span>
-										<span class="p-1 btn btn-secondary btn-sm border border-0 text-black">Feature</span>
-									</div>
-								</div>
-							</button>
-							<button class="w-100 bg-white border-0 rounded-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
-								<div class="fs-2">
-									<i class='bx bx-help-circle' style='color:#00d68a'></i>  
-								</div>
-								<div class="p-2 text-start">
-									<div class="fw-bold">Use charts and diagrams</div>
-									<div class="pt-1">
-										<div class="text-secondary">#5 created in 2022-10-08</div>
-										<div class="" title="">While it is not always necessary, sometimes it might be...</div>
-									</div>
-									<div class="pt-1">
-										<span class="p-1 btn btn-primary border border-0">High</span>
-										<span class="p-1 btn btn-secondary btn-sm border border-0 text-black">Feature</span>
-									</div>
-								</div>
-							</button> -->
 						</div>
 					</div>
 				</div>
@@ -173,54 +123,6 @@
 									</div>
 								</div>
 							</button>
-							<!-- <button class="w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
-								<div class="fs-2">
-									<i class='bx bx-loader-alt' style='color:#00d68a'></i> 
-								</div>
-								<div class="p-2 text-start">
-									<div class="fw-bold">Provide access</div>
-									<div class="pt-1">
-										<div class="text-secondary">#7 created in 2022-10-08</div>
-										<div class="" title="to the affected account and services if possible. It might be hard to reproduce the exact environment on a local machine.">to the affected account and services if possible. It mi...</div>
-									</div>
-									<div class="pt-1">
-										<span class="p-1 btn btn-primary border border-0">High</span>
-										<span class="p-1 btn btn-secondary btn-sm border border-0 text-black">Bug</span>
-									</div>
-								</div>
-							</button>
-							<button class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
-								<div class="fs-2">
-									<i class='bx bx-loader-alt' style='color:#00d68a'></i> 
-								</div>
-								<div class="p-2 text-start">
-									<div class="fw-bold">Provide environment information</div>
-									<div class="pt-1">
-										<div class="text-secondary">#8 created in 2022-10-08</div>
-										<div class="" title="i.e., browser version, operating system version etc. Sometimes a list of installed browser plugins and extensions might be helpful as well.">i.e., browser version, operating system version etc. So...</div>
-									</div>
-									<div class="pt-1">
-										<span class="p-1 btn btn-primary border border-0">High</span>
-										<span class="p-1 btn btn-secondary btn-sm border border-0 text-black">Bug</span>
-									</div>
-								</div>
-							</button>
-							<button class="w-100 bg-white bg-white border-0 rounded-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
-								<div class="fs-2">
-									<i class='bx bx-loader-alt' style='color:#00d68a'></i>  
-								</div>
-								<div class="p-2 text-start">
-									<div class="fw-bold">Provide a link to an exception and/or a stack trace</div>
-									<div class="pt-1">
-										<div class="text-secondary">#9 created in 2022-10-08</div>
-										<div class="" title="as investigating those is usually the first step to take in resolving the problem.">as investigating those is usually the first step to tak...</div>
-									</div>
-									<div class="pt-1">
-										<span class="p-1 btn btn-primary border border-0">High</span>
-										<span class="p-1 btn btn-secondary btn-sm border border-0 text-black">Bug</span>
-									</div>
-								</div>
-							</button> -->
 						</div>
 					</div>
 				</div>
@@ -248,54 +150,6 @@
 									</div>
 								</div>
 							</button>
-							<!-- <button class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
-								<div class="fs-2">
-									<i class='bx bx-check-circle' style='color:#00d68a'  ></i> 
-								</div>
-								<div class="p-2 text-start">
-									<div class="fw-bold">Provide access to the affected server or database dump</div>
-									<div class="pt-1">
-										<div class="text-secondary">#11 created in 2022-10-08</div>
-										<div class="" title="If it is possible and when it does not violate security policies, it is usually helpful for the developer to access the original data that might have played a role in the problem.">If it is possible and when it does not violate security...</div>
-									</div>
-									<div class="pt-1">
-										<span class="p-1 btn btn-primary border border-0">High</span>
-										<span class="p-1 btn btn-secondary btn-sm border border-0 text-black">Bug</span>
-									</div>
-								</div>
-							</button>
-							<button class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
-								<div class="fs-2">
-									<i class='bx bx-check-circle' style='color:#00d68a'  ></i> 
-								</div>
-								<div class="p-2 text-start">
-									<div class="fw-bold">Make a screencast</div>
-									<div class="pt-1">
-										<div class="text-secondary">#12 created in 2022-10-08</div>
-										<div class="" title="It is not always necessary, but many times a short screencast (or at least a screenshot) says more than a thousand words. While working on MacOS you can use QuickTime Player for the purpose but there are plenty of tools available for other operating systems as well.">It is not always necessary, but many times a short scre...</div>
-									</div>
-									<div class="pt-1">
-										<span class="p-1 btn btn-primary border border-0">High</span>
-										<span class="bp-1 btn btn-secondary btn-sm border border-0 text-black">Bug</span>
-									</div>
-								</div>
-							</button>
-							<button  class="w-100 bg-white bg-white border-0 rounded-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
-								<div class="fs-2">
-									<i class='bx bx-check-circle' style='color:#00d68a'  ></i>
-								</div>
-								<div class="p-2 text-start">
-									<div class="fw-bold">Provide contact information</div>
-									<div class="pt-1">
-										<div class="text-secondary">#13 created in 2022-10-08</div>
-										<div class="" title="of the person that reported the bug. This will not always be possible, but in some cases it might be advantageous and most effective if a developer can have a chat with a person that actually experienced the bug, especially if the steps to reproduce a problem are not deterministic.">of the person that reported the bug. This will not alwa...</div>
-									</div>
-									<div class="pt-1">
-										<span class="p-1 btn btn-primary border border-0">High</span>
-										<span class="p-1 btn btn-secondary btn-sm border border-0 text-black">Bug</span>
-									</div>
-								</div>
-							</button> -->
 						</div>
 					</div>
 				</div>
@@ -319,7 +173,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<form action="#">
+						<form action="index.php" method="post">
 							<div class="mb-3">
 								<label for="title" class="from-label fw-bold">Title</label>
 								<input type="text" name="Title" id="title" class="form-control">
