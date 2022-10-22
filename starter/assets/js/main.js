@@ -1,15 +1,9 @@
 // //variable global
 // //variable des information
-// let title = document.getElementById("title");
-// let feature = document.getElementById("feature");
-// let bug = document.getElementById("bug");
-// let priority = document.getElementById("Priority");
-// let Status = document.getElementById("status");
-// let date = document.getElementById("date");
-// let description = document.getElementById("description");
+
 // //variable button
-// let submit = document.getElementById('submit');
-// let _delete = document.getElementById('delete');
+let submit = document.getElementById('submit');
+let _delete = document.getElementById('delete');
 // //variable column
 // let count_to = document.getElementById('to-do-tasks-count');
 // let count_pro = document.getElementById('in-progress-tasks-count');
@@ -182,6 +176,11 @@ function update(i){
     mode = 'update';
     Afficher();
 }
+
+// document.getElementsByClassName('button_task').addEventListener("click" , function(){
+//     submit.innerHTML = 'update';
+//     _delete.style.display = 'block';
+// })
 // //return indice 
 // // function returnIndice(i){
 // //     pointer = i;
@@ -208,3 +207,59 @@ function update(i){
 //     // }
     
 // }
+// var title = document.getElementById("title");
+// var feature = document.getElementById("feature");
+// var bug = document.getElementById("bug");
+// var priority = document.getElementById("Priority");
+// var Status = document.getElementById("status");
+// var date = document.getElementById("date");
+// var description = document.getElementById("description");
+
+
+var title = $("#title").val();
+var feature = $("#feature").val();
+var priority = $("#Priority").val();
+var Status = $("#status").val();
+var date = $("#date").val();
+var description = $("#description").val();
+$(document).ready(function(){
+    Afficher();
+})
+
+function Afficher(){
+    var AfficherData = "true";
+    $.ajax({
+        url:"Afficher.php",
+        type:"post",
+        data:{
+            AfficherEnv:AfficherData
+        },
+        success:function(data,status){
+            $('#to_do_tasks').html(data);
+        }
+    });
+}
+
+
+function AddTask(){
+    $.ajax({
+        url:"Create.php",
+        type:'post',
+        data:{
+            Title:title,
+            Type:feature,
+            Priority:priority,
+            Status:Status,
+            Date:date,
+            Description:description
+        },
+        success:function(data,status){
+            Afficher();
+        }
+    })
+}
+
+
+
+
+
