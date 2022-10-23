@@ -17,7 +17,44 @@
 	<!-- ================== END core-css ================== -->
 </head>
 <body>
-	<?php// $do=$_GET['do'] ?   $_GET['do'] : ' '?>
+
+
+	<!-- Ajouter -->
+	<?php 
+		require "Connection.php";
+
+		// extract($_POST);
+
+		if(isset($_POST['save'])){
+			$title = $_POST['Title'];
+			$type = $_POST['Type'];
+			$Proirity = $_POST['Priority'];
+			$Status = $_POST['Status'];
+			$date = $_POST['Date'];
+			$description = $_POST['Description'];
+
+			if(isset($title) && isset($type) && isset($Proirity) && isset($Status) && isset($date) && isset($description)){
+				$commande ="INSERT INTO `task`(`Title`, `Type`, `Priority`, `Status`, `Date`, `Description`)
+				VALUES ('$title','$type','$Proirity','$Status','$date','$description')";
+				$resul = mysqli_query($connection,$commande);
+				header('location:index.php');
+			}
+		}
+	?>
+	<!-- Ajouter -->
+
+
+	<!-- Update -->
+	<?php 
+		if(isset($_POST['return'])){
+			$id = $_POST['Id'];
+			$sql = "SELECT * FROM `task` WHERE Id = $id LIMIT 1";
+			$res = mysqli_query($connection,$sql);
+			$row = mysqli_fetch_assoc($res);
+		}
+		
+	?>
+	<!-- Update -->
 	<!-- BEGIN #app -->
 	<div id="app" class="app-without-sidebar">
 		<!-- BEGIN #content -->
@@ -36,7 +73,7 @@
 				</div>
 				
 				<div class="btn-task align-self-center">
-					<button class="btn btn-success rounded-pill d-flex" data-bs-toggle="modal" data-bs-target="#Modal" ><i class='bx bx-plus p-1' style='color:#00218b'></i> Add Task</button>
+					<button id="addTask" class="btn btn-success rounded-pill d-flex" data-bs-toggle="modal" data-bs-target="#Modal" ><i class='bx bx-plus p-1' style='color:#00218b'></i> Add Task</button>
 				</div>
 			</div>
 			<div class="row">
@@ -54,7 +91,7 @@
 								$sql= mysqli_query($connection,$commande);
 								while ($element = mysqli_fetch_assoc($sql)){
 									?>
-									<button onclick="//location.href='Update.php?id=<?php //echo $element['Id'] ?>'" id="<?php echo $id = $element['Id'] ?>" class=" w-100 bg-white border-0 border-secondary border-bottom d-flex">
+									<div name="return" onclick="'?id=<?php echo $element['Id'] ?>'" id="<?php echo $id = $element['Id'] ?>" class="show w-100 bg-white border-0 border-secondary border-bottom d-flex" >
 										<div class="fs-2">
 											<i class='bx bx-help-circle' style='color:#00d68a'></i> 
 										</div>
@@ -67,9 +104,10 @@
 											<div class="pt-1">
 												<span class="p-1 btn btn-primary border border-0"><?php echo $element['Priority'] ?></span>
 												<span class="p-1 btn btn-secondary border border-0 text-black"><?php echo $element['Type'] ?></span>
+												<a class="up" href="index.php?id=<?php echo $element['Id'] ?>">Update</a>
 											</div>
 										</div>
-									</button>
+								</div>
 									<?php
 								};
 							?>
@@ -89,7 +127,7 @@
 								$sql= mysqli_query($connection,$commande);
 								while ($element = mysqli_fetch_assoc($sql)){
 									?>
-									<button onclick="//location.href='Update.php?id=<?php// echo $element['Id'] ?>'"  class="w-100 bg-white border-0 border-secondary border-bottom d-flex button_task" data-bs-toggle="modal" data-bs-target="#Modal_update">
+									<button name="return" onclick="//location.href='Update.php?id=<?php// echo $element['Id'] ?>'"  class="w-100 bg-white border-0 border-secondary border-bottom d-flex button_task" data-bs-toggle="modal" data-bs-target="#Modal">
 										<div class="fs-2">
 											<i class='bx bx-loader-alt' style='color:#00d68a'></i> 
 										</div>
@@ -124,7 +162,7 @@
 								$sql= mysqli_query($connection,$commande);
 								while ($element = mysqli_fetch_assoc($sql)){
 									?>
-									<button onclick="//location.href='?id=<?php// echo $element['Id'] ?>'" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex btn_update" data-bs-toggle="modal" data-bs-target="#Modal_update">
+									<button name="return" onclick="//location.href='?id=<?php// echo $element['Id'] ?>'" class="show w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex btn_update" data-bs-toggle="modal" data-bs-target="#Modal">
 										<div class="fs-2">
 											<i class='bx bx-check-circle' style='color:#00d68a'  ></i>
 										</div>
@@ -164,19 +202,19 @@
 		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		</div>
 		<div class="modal-body">
-			<form action="Create.php" method="post">
+			<form action="" method="post">
 				<div class="mb-3">
 					<label for="title" class="from-label fw-bold">Title</label>
-					<input type="text" name="Title" id="title" class="form-control" placeholder="Title">
+					<input type="text" name="Title" id="title" class="form-control" placeholder="Title" value="<?php echo $row['Title']?>">
 				</div>
 				<label for="type" class="from-label fw-bold">Type</label>
 				<div class="mb-3">
 					<div class="mb-1">
-						<input type="radio" checked class="form-check-input" name="Type" id="feature" value="feature">
+						<input type="radio" checked class="form-check-input" name="Type" id="feature" value="feature"<?php //echo ($row['Type']=='feature')?"checked":"";?>>
 						<label for="type" class="form-check-label">feature</label>
 					</div>
 					<div class="mb-1">
-						<input type="radio" class="form-check-input" name="Type" id="bug" value="bug">
+						<input type="radio" class="form-check-input" name="Type" id="bug" value="bug"<?php //echo ($row['Title']=='bug')?"checked":"";?>>
 						<label for="type" class="form-check-label">bug</label>
 					</div>
 				</div>
@@ -201,16 +239,16 @@
 				</div>
 				<div class="mb-3">
 					<label for="Date" class="from-label fw-bold">Date</label>
-					<input type="date" class="form-control" name="Date" id="date">
+					<input type="date" class="form-control" name="Date" id="date" value="<?php //echo $row['Date']?>">
 				</div>
 				<div class="mb-3">
 					<label for="description" class="from-label fw-bold">Description</label>
-					<textarea class="form-control" name="Description" id="description" rows="10"></textarea>
+					<textarea class="form-control" name="Description" id="description" rows="10" value="<?php //echo $row['Description']?>"></textarea>
 				</div>
 				<div class="modal-footer" id="modal-footer">
 					<button type="submit" class="btn btn-secondary text-black" data-bs-dismiss="modal">Close</button>
-					<button type="submit" id="delete" onclick="" class="btn btn-red" data-bs-dismiss="modal">Delete</button>
-					<button type="submit" id="submit" class="btn btn-primary" data-bs-dismiss="modal" onclick="AddTask()">Save</button>
+					<button type="submit" id="delete" name="delete" class="btn btn-red" data-bs-dismiss="modal">Delete</button>
+					<button type="submit" id="submit" name="save"  class="btn btn-primary" data-bs-dismiss="modal">Save</button>
 				</div>
 			</form>
 		</div>
@@ -222,7 +260,7 @@
 
 
 <!--------------------------------- Modal Update------------------------------------------------>
-<div class="modal fade" id="Modal_update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="Modal_update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 	<div class="modal-content">
 		<div class="modal-header">
@@ -283,7 +321,7 @@
 		
 	</div>
 	</div>
-</div>
+</div> -->
 <!-- Modal -->
 
 

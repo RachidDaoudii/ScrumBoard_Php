@@ -20,13 +20,5 @@
     header('location:index.php');
     
 
-    
-    // if (isset($commande)){
-    //     echo "<h4>Insertion avec sucess</h4>";
-    // }
-    // else{
-    //     echo "<h4>Errur Insertion</h4>";
-    // }
-
 
 ?>

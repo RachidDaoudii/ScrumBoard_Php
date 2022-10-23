@@ -4,6 +4,24 @@
 // //variable button
 let submit = document.getElementById('submit');
 let _delete = document.getElementById('delete');
+_delete.style.display = 'none';
+document.querySelector('.show').addEventListener("click" , function(){
+    submit.innerHTML = 'update';
+    _delete.style.display = 'block';
+})
+
+document.querySelector('#addTask').addEventListener("click" , function(){
+    submit.innerHTML = 'save';
+    _delete.style.display = 'none';
+})
+
+var modal = document.querySelector('#Modal');
+var ji = document.querySelector('.up');
+ji.onclick = function(){
+    modal.style.display = 'block';
+}
+
+
 // //variable column
 // let count_to = document.getElementById('to-do-tasks-count');
 // let count_pro = document.getElementById('in-progress-tasks-count');
@@ -26,7 +44,7 @@ let _delete = document.getElementById('delete');
 
 
 //hidden  button Delete
-_delete.style.display = 'none';
+
 
 // //function Ajouter Task
 // function Ajouter(){
@@ -163,24 +181,21 @@ _delete.style.display = 'none';
 // Afficher();
 
 // //function Modifier 
-function update(i){
-    // index = i;
-    // title.value = data[i].title;
-    // feature.value = data[i].feature;
-    // priority.value = data[i].priority;
-    // Status.value = data[i].status;
-    // date.value = data[i].date;
-    // description.value = data[i].description;
-    submit.innerHTML = 'update';
-    _delete.style.display = 'block';
-    mode = 'update';
-    Afficher();
-}
-
-// document.getElementsByClassName('button_task').addEventListener("click" , function(){
+// function update(i){
+//     // index = i;
+//     // title.value = data[i].title;
+//     // feature.value = data[i].feature;
+//     // priority.value = data[i].priority;
+//     // Status.value = data[i].status;
+//     // date.value = data[i].date;
+//     // description.value = data[i].description;
 //     submit.innerHTML = 'update';
 //     _delete.style.display = 'block';
-// })
+//     mode = 'update';
+//     Afficher();
+// }
+
+
 // //return indice 
 // // function returnIndice(i){
 // //     pointer = i;
@@ -279,7 +294,9 @@ function update(i){
 // })
 
 
-let dd =document.getElementsByClassName('btn_update');
-submit.addEventListener('click',function(){
-    // location.reload();
-})
+// let dd =document.getElementsByClassName('btn_update');
+// submit.addEventListener('click',function(){
+//     // location.reload();
+// })
+
+
