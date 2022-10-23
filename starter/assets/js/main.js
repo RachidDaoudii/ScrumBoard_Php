@@ -216,50 +216,55 @@ function update(i){
 // var description = document.getElementById("description");
 
 
-var title = $("#title").val();
-var feature = $("#feature").val();
-var priority = $("#Priority").val();
-var Status = $("#status").val();
-var date = $("#date").val();
-var description = $("#description").val();
-$(document).ready(function(){
-    Afficher();
+// var title = $("#title").val();
+// var feature = $("#feature").val();
+// var priority = $("#Priority").val();
+// var Status = $("#status").val();
+// var date = $("#date").val();
+// var description = $("#description").val();
+
+// $(document).ready(function(){
+    
+// });
+
+// AfficherData();
+
+// function AfficherData(){
+//     var AfficherData = "true";
+//     $.ajax({
+//         url:"Afficher.php",
+//         type:'post',
+//         data:{
+//             AfficherEnv:AfficherData
+//         },
+//         success:function(data,status){
+//             $('#to_do_tasks').html(data);
+//         }
+//     });
+// }
+
+
+// function AddTask(){
+//     $.ajax({
+//         url:"Create.php",
+//         type:'post',
+//         data:{
+//             Title:title,
+//             Type:feature,
+//             Priority:priority,
+//             Status:Status,
+//             Date:date,
+//             Description:description
+//         },
+//         success:function(data,status){
+//             AfficherData();
+//         }
+//     })
+// }
+
+submit.addEventListener('click',function(){
+    // location.reload();
 })
-
-function Afficher(){
-    var AfficherData = "true";
-    $.ajax({
-        url:"Afficher.php",
-        type:"post",
-        data:{
-            AfficherEnv:AfficherData
-        },
-        success:function(data,status){
-            $('#to_do_tasks').html(data);
-        }
-    });
-}
-
-
-function AddTask(){
-    $.ajax({
-        url:"Create.php",
-        type:'post',
-        data:{
-            Title:title,
-            Type:feature,
-            Priority:priority,
-            Status:Status,
-            Date:date,
-            Description:description
-        },
-        success:function(data,status){
-            Afficher();
-        }
-    })
-}
-
-
 
 
 

@@ -49,28 +49,28 @@
 						<div class="todo" id="to_do_tasks">
 							<!-- TO DO TASKS HERE -->
 							<?php 
-								//$commande = "SELECT * FROM  `task` WHERE status = 'To Do'";
-								//$sql= mysqli_query($connection,$commande);
-								//while ($element = mysqli_fetch_assoc($sql)){
+								$commande = "SELECT * FROM  `task` WHERE status = 'To Do'";
+								$sql= mysqli_query($connection,$commande);
+								while ($element = mysqli_fetch_assoc($sql)){
 									?>
-									<!-- <button onclick="<?php //$id = $element['Id'] ?>" class=" w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal" id="btn">
+									<button onclick="<?php $id = $element['Id'] ?>" class=" w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal" id="btn">
 										<div class="fs-2">
 											<i class='bx bx-help-circle' style='color:#00d68a'></i> 
 										</div>
 										<div class="p-2 text-start">
-											<div class="fw-bold" id="titre"><?php// echo $element['Title'] ?></div>
+											<div class="fw-bold" id="titre"><?php echo $element['Title'] ?></div>
 											<div class="pt-1">
-												<div class=" text-secondary">#<?php //echo $element['Id'] ?> created in <?php echo $element['Date'] ?></div>
-												<div class="text-truncate" title=""><?php //echo $element['Description'] ?></div>
+												<div class=" text-secondary">#<?php echo $element['Id'] ?> created in <?php echo $element['Date'] ?></div>
+												<div class="text-truncate" title=""><?php echo $element['Description'] ?></div>
 											</div>
 											<div class="pt-1">
-												<span class="p-1 btn btn-primary border border-0"><?php// echo $element['Priority'] ?></span>
-												<span class="p-1 btn btn-secondary border border-0 text-black"><?php// echo $element['Type'] ?></span>
+												<span class="p-1 btn btn-primary border border-0"><?php echo $element['Priority'] ?></span>
+												<span class="p-1 btn btn-secondary border border-0 text-black"><?php echo $element['Type'] ?></span>
 											</div>
 										</div>
-									</button> -->
+									</button>
 									<?php
-								//};
+								};
 							?>
 						</div>
 					</div>
