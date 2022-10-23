@@ -262,9 +262,24 @@ function update(i){
 //     })
 // }
 
+// submit.addEventListener('click',function(){
+//     // location.reload();
+// })
+
+
+
+// $(document).ready(function(){
+//     $('.btn_update').on('click',function(){
+//         $('#Modal_update').modal('show')
+//     })
+// })
+// t
+// ty.addEventListener('click',function(){
+//     alert("(this).data['Id']");
+// })
+
+
+let dd =document.getElementsByClassName('btn_update');
 submit.addEventListener('click',function(){
     // location.reload();
 })
-
-
-

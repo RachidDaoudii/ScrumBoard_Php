@@ -44,6 +44,7 @@
 				<div class="col-lg-4 col-md-6 col-sm-12">
 					<div class="p-2">
 						<div class="">
+							<?php ?>
 							<h4 class="p-2 mb-0 bg-black text-light fs-6">To do (<span id="to-do-tasks-count">0</span>)</h4>
 						</div>
 						<div class="todo" id="to_do_tasks">
@@ -53,7 +54,7 @@
 								$sql= mysqli_query($connection,$commande);
 								while ($element = mysqli_fetch_assoc($sql)){
 									?>
-									<button onclick="<?php $id = $element['Id'] ?>" class=" w-100 bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal" id="btn">
+									<button onclick="//location.href='Update.php?id=<?php //echo $element['Id'] ?>'" id="<?php echo $id = $element['Id'] ?>" class=" w-100 bg-white border-0 border-secondary border-bottom d-flex">
 										<div class="fs-2">
 											<i class='bx bx-help-circle' style='color:#00d68a'></i> 
 										</div>
@@ -88,7 +89,7 @@
 								$sql= mysqli_query($connection,$commande);
 								while ($element = mysqli_fetch_assoc($sql)){
 									?>
-									<button onclick="<?php $id = $element['Id'] ?>"  class="w-100 bg-white border-0 border-secondary border-bottom d-flex button_task" data-bs-toggle="modal" data-bs-target="#Modal">
+									<button onclick="//location.href='Update.php?id=<?php// echo $element['Id'] ?>'"  class="w-100 bg-white border-0 border-secondary border-bottom d-flex button_task" data-bs-toggle="modal" data-bs-target="#Modal_update">
 										<div class="fs-2">
 											<i class='bx bx-loader-alt' style='color:#00d68a'></i> 
 										</div>
@@ -123,7 +124,7 @@
 								$sql= mysqli_query($connection,$commande);
 								while ($element = mysqli_fetch_assoc($sql)){
 									?>
-									<button onclick="location.href='Delete.php?id=<?php echo $id ?>'" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex" data-bs-toggle="modal" data-bs-target="#Modal">
+									<button onclick="//location.href='?id=<?php// echo $element['Id'] ?>'" class="w-100 bg-white bg-white border-0 border-secondary border-bottom d-flex btn_update" data-bs-toggle="modal" data-bs-target="#Modal_update">
 										<div class="fs-2">
 											<i class='bx bx-check-circle' style='color:#00d68a'  ></i>
 										</div>
@@ -154,7 +155,7 @@
 	</div>
 	<!-- END #app -->
 	
-	<!-- Modal -->
+	<!--------------------------------- Modal ------------------------------------------------>
 <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 	<div class="modal-content">
@@ -218,6 +219,76 @@
 	</div>
 </div>
 <!-- Modal -->
+
+
+<!--------------------------------- Modal Update------------------------------------------------>
+<div class="modal fade" id="Modal_update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+		<h5 class="modal-title" id="exampleModalLabel">Update Task</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<form action="update.php" method="post">
+				<div class="mb-3">
+					<label for="title" class="from-label fw-bold">Title</label>
+					<input type="text" name="Title" id="title" class="form-control" placeholder="Title">
+				</div>
+				<label for="type" class="from-label fw-bold">Type</label>
+				<div class="mb-3">
+					<div class="mb-1">
+						<input type="radio" checked class="form-check-input" name="Type" id="feature" value="feature">
+						<label for="type" class="form-check-label">feature</label>
+					</div>
+					<div class="mb-1">
+						<input type="radio" class="form-check-input" name="Type" id="bug" value="bug">
+						<label for="type" class="form-check-label">bug</label>
+					</div>
+				</div>
+				<div class="mb-3">
+					<label for="Priority" class="from-label fw-bold">Priority</label>
+					<select name="Priority" required id="Priority" class="form-select" >
+						<option disabled selected>Please select</option>
+						<option value="Low">Low</option>
+						<option value="Medium">Medium</option>
+						<option value="High">High</option>
+						<option value="Critical">Critical</option>
+					</select>
+				</div>
+				<div class="mb-3">
+					<label for="status" class="from-label fw-bold">Status</label>
+					<select name="Status" required id="status" class="form-select" >
+						<option value="" disabled selected>Please select</option>
+						<option value="To Do">To do</option>
+						<option value="In Progress">In Progress</option>
+						<option value="Done">Done</option>
+					</select>
+				</div>
+				<div class="mb-3">
+					<label for="Date" class="from-label fw-bold">Date</label>
+					<input type="date" class="form-control" name="Date" id="date">
+				</div>
+				<div class="mb-3">
+					<label for="description" class="from-label fw-bold">Description</label>
+					<textarea class="form-control" name="Description" id="description" rows="10"></textarea>
+				</div>
+				<div class="modal-footer" id="modal-footer">
+					<button type="submit" class="btn btn-secondary text-black" data-bs-dismiss="modal">Close</button>
+					<button type="submit" id="delete" onclick="" class="btn btn-red" data-bs-dismiss="modal">Delete</button>
+					<button type="submit" id="update" name="update" class="btn btn-primary" data-bs-dismiss="modal" onclick="">Updatas</button>
+				</div>
+			</form>
+		</div>
+		
+	</div>
+	</div>
+</div>
+<!-- Modal -->
+
+
+
+
 	
 	<!-- ================== BEGIN core-js ================== -->
 	<script src="assets/js/vendor.min.js"></script>
