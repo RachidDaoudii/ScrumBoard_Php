@@ -2,24 +2,30 @@
 // //variable des information
 
 // //variable button
-let submit = document.getElementById('submit');
-let _delete = document.getElementById('delete');
-_delete.style.display = 'none';
-document.querySelector('.show').addEventListener("click" , function(){
-    submit.innerHTML = 'update';
-    _delete.style.display = 'block';
-})
+// let submit = document.getElementById('submit');
+// let _delete = document.getElementById('delete');
+// _delete.style.display = 'none';
+// document.querySelector('.show').addEventListener("click" , function(){
+//     submit.innerHTML = 'update';
+//     _delete.style.display = 'block';
+// })
 
-document.querySelector('#addTask').addEventListener("click" , function(){
-    submit.innerHTML = 'save';
-    _delete.style.display = 'none';
-})
+// document.querySelector('#addTask').addEventListener("click" , function(){
+//     submit.innerHTML = 'save';
+//     _delete.style.display = 'none';
+// })
 
-var modal = document.querySelector('#Modal');
-var ji = document.querySelector('.up');
-ji.onclick = function(){
-    modal.style.display = 'block';
-}
+
+// let up =document.querySelector('.up');
+// up.onclick = function(){
+//     document.getElementById('exampleModalLabel').innerHTML ='Update Task';
+// }
+
+// var modal = document.querySelector('#Modal');
+// var ji = document.querySelector('.up');
+// ji.onclick = function(){
+//     modal.style.display = 'block';
+// }
 
 
 // //variable column
