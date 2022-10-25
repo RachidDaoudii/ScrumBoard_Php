@@ -24,14 +24,8 @@ require "Connection.php";
             $description = $row['Description'];
         }
     }
-    if(isset($_POST['btn-update'])){
-        $com = "UPDATE `task` SET `Title`=$title,`Type`=$type,`Priority`=$proirity',`Status`=$status,`Date`=$date,`Description`=$description WHERE `Id`=$id";
-        $res = mysqli_query($connection,$com);
-
-    }
     
 ?>
-<!-- Update -->
 
 
 	<!-------------------------------------------- Modal-Update ------------------------------------------------>
@@ -43,7 +37,7 @@ require "Connection.php";
 		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		</div>
 		<div class="modal-body">
-			<form action="" method="post">
+			<form action="chen.php?id=<?php echo $element['Id']?>" method="post">
 				<div class="mb-3">
 					<label for="title" class="from-label fw-bold">Title</label>
 					<input type="text" name="Title" id="title" class="form-control" placeholder="Title" value="<?php echo $element['Title'];?>">
@@ -89,7 +83,7 @@ require "Connection.php";
 				<div class="modal-footer" id="modal-footer">
 					<button type="submit" class="btn btn-secondary text-black" data-bs-dismiss="modal">Close</button>
 					<button type="submit" name="delete" class="btn btn-red" data-bs-dismiss="modal">Delete</button>
-					<button type="submit" id="submit" name="btn-update"  class="btn btn-primary" data-bs-dismiss="modal">Update</button>
+					<button type="submit" name="btn-update"  class="btn btn-primary" data-bs-dismiss="modal">Update</button>
 				</div>
 			</form>
 		</div>
