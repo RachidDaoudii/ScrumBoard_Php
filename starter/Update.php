@@ -37,9 +37,9 @@ require "Connection.php";
 		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		</div>
 		<div class="modal-body">
-			<form action="chen.php?id=<?php echo $element['Id']?>" method="post">
+			<form action="" method="post">
 				<div class="mb-3">
-					<label for="title" class="from-label fw-bold">Title</label>
+					<label for="title" class="from-label fw-bold">Titlehu</label>
 					<input type="text" name="Title" id="title" class="form-control" placeholder="Title" value="<?php echo $element['Title'];?>">
 				</div>
 				<label for="type" class="from-label fw-bold">Type</label>
